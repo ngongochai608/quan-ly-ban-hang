@@ -43,7 +43,10 @@
                 @foreach($invoice_info_full as $info_invoice)
                     <tr>
                         <th>{{ $stt; }}</th>
-                        <td class="invoice-name-product">{{ $info_invoice->product_name }}</td>
+                        <td class="invoice-name-product">
+                            <h6>{{ $info_invoice->product_name }}</h6>
+                            <span>{{ number_format($info_invoice->product_price, 0, ',', '.') }}đ</span>
+                        </td>
                         <td style="width:220px;padding-right:40px;">
                             <div class="input-group number-input-group">
                                 <div class="input-group-prepend">
@@ -55,7 +58,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="invoice-price-product">{{ number_format($info_invoice->product_price, 0, ',', '.') }}đ</td>
+                        <td class="invoice-price-product">{{ number_format(($info_invoice->product_price * $info_invoice->qty), 0, ',', '.') }}đ</td>
                         <td style="width:60px">
                             <a href="{{ URL::to('remove-item-invoice/'.$info_invoice->product_id.'/'.$invoice->invoice_id) }}" class="btn btn-danger">Xoá</a>
                         </td>
@@ -64,7 +67,9 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="text-end mb-4 form-row">
+        <div class="input-group mb-3">
+            <a href="{{ URL::to('invoice-add-food/'.$invoice->invoice_id) }}" class="btn btn-primary d-inline-block ml-auto">Thêm món</a>
+        </div>
         <div class="input-group mb-3 max-width-400 ml-auto">
             <span class="input-group-text" id="invoice_discount_value">Giảm giá</span>
             @if (!empty($invoice->invoice_discount_value))
@@ -90,24 +95,24 @@
         </div>
         <div class="text-end mb-4">
             <button type="submit" class="btn btn-primary text-end">Cập nhập</button>
-            <button type="submit" class="btn btn-success text-end">Thanh Toán</button>
+            <a href="{{ URL::to('invoice-payment/'.$invoice->invoice_id) }}" class="btn btn-success text-end">Thanh Toán</a>
         </div>
         <div class="row">
             @if (!empty($invoice->invoice_discount_value))
-                <h3 class="text-end">
+                <h5 class="text-end">
                     @if ($invoice->invoice_discount_type == 'money')
                         Giảm: {{ number_format($invoice->invoice_discount_value, 0, ',', '.') }}đ
                     @else
                         Giảm: {{ $invoice->invoice_discount_value }}%
                     @endif
-                </h3>
-                <h3 class="text-end">
+                </h5>
+                <h5 class="text-end">
                     Giá gốc: {{ number_format($invoice->invoice_total_price_discount, 0, ',', '.') }}đ
-                </h3>
+                </h5>
             @endif
         </div>
         <div class="row">
-            <h3 class="text-end">Thành tiền: {{ number_format($invoice->invoice_total_price, 0, ',', '.') }}đ</h3>
+            <h5 class="text-end">Thành tiền: {{ number_format($invoice->invoice_total_price, 0, ',', '.') }}đ</h5>
         </div>
     </form>
 </div>

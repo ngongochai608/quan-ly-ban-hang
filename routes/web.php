@@ -151,6 +151,14 @@ Route::get('all-invoice', [
     InvoiceController::class,
     'allInvoice'
 ]);
+Route::get('invoice-payment/{invoice_id}', [
+    InvoiceController::class,
+    'paymentInvoice'
+]);
+Route::get('invoice-add-food/{invoice_id}', [
+    InvoiceController::class,
+    'addItemInvoice'
+]);
 Route::post('create-invoice', [
     InvoiceController::class,
     'createInvoice'

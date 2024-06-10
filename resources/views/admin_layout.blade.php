@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Quản lý bán hàng</title>
+        <title>Ốc xinh sài gòn</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{ asset('public/css/admin.css') }}" rel="stylesheet" />
         <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet" />
@@ -105,7 +105,6 @@
                 button.addEventListener('click', function() {
                     var inputName = this.closest('.number-input-group').querySelector('.input-number').getAttribute('name');
                     var inputs = document.querySelectorAll(`.input-number[name="${inputName}"]`);
-                    console.log(inputs);
                     inputs.forEach(input => {
                         var currentValue = parseInt(input.value);
                         var maxValue = parseInt(input.max);
@@ -120,7 +119,6 @@
                 button.addEventListener('click', function() {
                     var inputName = this.closest('.number-input-group').querySelector('.input-number').getAttribute('name');
                     var inputs = document.querySelectorAll(`.input-number[name="${inputName}"]`);
-                    console.log(inputs);
                     inputs.forEach(input => {
                         var currentValue = parseInt(input.value);
                         var minValue = parseInt(input.min);

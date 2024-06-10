@@ -144,4 +144,44 @@ class InvoiceController extends Controller
         DB::table('qlbh_invoice')->update($data);
         return Redirect::to('view-invoice/'.$invoice_id);
     }
+
+    public function paymentInvoice ($invoice_id) {
+        DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->update(['invoice_status' => 'paid']);
+        $invoice = DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->get()->first();
+        $invoice_info = json_decode($invoice->invoice_info);
+        $invoice_info_full = array();
+        foreach($invoice_info as $id => $qty) {
+            $product = DB::table('qlbh_products')->where('product_id', $id)->get()->first();
+            $product->qty = $qty;
+            $invoice_info_full[] = $product;
+        }
+        $table_invoice = DB::table('qlbh_table')->where('table_id', $invoice->invoice_table_id)->get()->first();
+        DB::table('qlbh_table')->where('table_id', $table_invoice->table_id)->update(['table_status' => 'empty']);
+        return view('admin.print_invoice')->with('invoice', $invoice)->with('table_invoice', $table_invoice)->with('invoice_info_full', $invoice_info_full);
+    }
+
+    public function addItemInvoice ($invoice_id) {
+        $invoice = DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->get()->first();
+        $allProduct = DB::table('qlbh_products')->get();
+        $allCategory = DB::table('qlbh_category_product')->get();
+        $allProductWithCategory = array();
+        foreach ($allCategory as $category) {
+            $products = DB::table('qlbh_products')->where('product_category_id', $category->category_id)->get();
+            $allProductWithCategory[$category->category_id] = $products;
+        }
+        $invoice_info = json_decode($invoice->invoice_info);
+        $invoice_info_full = array();
+        foreach($invoice_info as $id => $qty) {
+            $product = DB::table('qlbh_products')->where('product_id', $id)->get()->first();
+            $product->qty = $qty;
+            $invoice_info_full[$id] = $product;
+        }
+        return view('admin.add_item_invoice')
+            ->with('all_products_with_category', $allProductWithCategory)
+            ->with('table_id', $invoice->invoice_table_id)
+            ->with('all_category', $allCategory)
+            ->with('all_product', $allProduct)
+            ->with('invoice_info_full', $invoice_info_full)
+            ->with('invoice_id', $invoice_id);
+    }
 }

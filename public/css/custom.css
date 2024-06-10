@@ -1,9 +1,52 @@
 .qlbh-template-grid-food-item img.default {
-    width: 60%;
+    width: 40%;
     height: auto;
     margin: 0 auto;
 }
 
+.qlbh-template-grid-food-item .card {
+    position: relative;
+    padding-top: 40px;
+}
+.qlbh-template-grid-food-item .price {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 10px;
+    margin: 0;
+    background-color: #C0C0C0;
+    border-radius: 3px;
+}
+.qlbh-template-grid-food-item .card-title {
+    color: #696969;
+}
+.qlbh-template-grid-food-item .btn {
+    border-color: #C0C0C0;
+    color: #C0C0C0;
+}
+.qlbh-template-grid-food-item .btn:hover {
+    background-color: #C0C0C0;
+    color: #fff;
+}
+.qlbh-template-grid-food {
+    align-items: stretch;
+}
+.qlbh-template-grid-food-item {
+    padding-bottom: 12px;
+}
+.qlbh-template-grid-food-item .card {
+    height: 100%;
+}
+.qlbh-template-grid-food-item .card-body {
+    display: flex;
+    flex-direction: column;
+}
+.qlbh-template-grid-food-item .card-body .number-input-group {
+    margin-top: auto;
+}
+#preview-food-order .preview-food-order-item {
+    width: 300px;
+}
 @media screen and (max-width: 600px) {
     .table-invoice {
         display: block;
