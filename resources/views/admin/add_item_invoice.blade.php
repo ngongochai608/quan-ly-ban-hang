@@ -22,91 +22,51 @@
             }
         ?>
         <input type="hidden" name="table_id" value="{{ $table_id }}" />
-        <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
+        <ul id="tabs-order" class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#tab-all" type="button" role="tab" aria-controls="all" aria-selected="true">Tất cả</button>
+                <button class="nav-link active" type="button" role="tab" data-controls="all">Tất cả</button>
             </li>
             @foreach ($all_category as $category)
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="{{ $category->category_id }}-tab" data-bs-toggle="pill" data-bs-target="#tab-{{ $category->category_id }}" type="button" role="tab" aria-controls="{{ $category->category_id }}" aria-selected="false">{{ $category->category_name }}</button>
+                    <button class="nav-link" type="button" role="tab" data-controls="{{ $category->category_id }}">{{ $category->category_name }}</button>
                 </li>
             @endforeach
         </ul>
-        <div class="tab-content">
-            <div class="tab-pane show active" id="tab-all" role="tabpanel" aria-labelledby="all-tab">
-                <div class="qlbh-template-grid-food row">
-                    @foreach ($all_product as $product)
-                        <?php
-                            $class_img = '';
-                            $img_name = $product->product_image;
-                            if (empty($img_name)) {
-                                $img_name = 'img-food-default.png';
-                                $class_img = 'default';
-                            }
-                        ?>
-                        <div class="qlbh-template-grid-food-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200">
-                            <div class="card">
-                                <img src="../public/uploads/products/{{ $img_name }}" class="card-img-top {{ $class_img }}" width="150" height="150">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $product->product_name }}</h5>
-                                    <p class="card-text">{{ number_format($product->product_price, 0, ',', '.') }}đ</p>
-                                    <div class="input-group number-input-group">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary button-decrement" type="button">-</button>
-                                        </div>
-                                        @if (isset($invoice_info_full[$product->product_id]))
-                                            <input type="number" name="qty_product-{{ $product->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="{{ $invoice_info_full[$product->product_id]->qty }}" min="0" max="100">
-                                        @else
-                                            <input type="number" name="qty_product-{{ $product->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="0" min="0" max="100">
-                                        @endif
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary button-increment" type="button">+</button>
-                                        </div>
+        <div id="tabs-content-order" class="tab-content">
+            <div class="qlbh-template-grid-food row">
+                @foreach ($all_product as $product)
+                    <?php
+                        $class_img = '';
+                        $img_name = $product->product_image;
+                        if (empty($img_name)) {
+                            $img_name = 'img-food-default.png';
+                            $class_img = 'default';
+                        }
+                    ?>
+                    <div class="qlbh-template-grid-food-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200" data-controls="{{ $product->product_category_id }}">
+                        <div class="card">
+                            <img src="../public/uploads/products/{{ $img_name }}" class="card-img-top {{ $class_img }}" width="150" height="150">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $product->product_name }}</h5>
+                                <p class="card-text">{{ number_format($product->product_price, 0, ',', '.') }}đ</p>
+                                <div class="input-group number-input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary button-decrement" type="button">-</button>
+                                    </div>
+                                    @if (isset($invoice_info_full[$product->product_id]))
+                                        <input type="number" name="qty_product-{{ $product->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="{{ $invoice_info_full[$product->product_id]->qty }}" min="0" max="100">
+                                    @else
+                                        <input type="number" name="qty_product-{{ $product->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="0" min="0" max="100">
+                                    @endif
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary button-increment" type="button">+</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            </div>
-            @foreach($all_products_with_category as $key => $products)
-                <div class="tab-pane" id="tab-{{ $key }}" role="tabpanel" aria-labelledby="{{ $key }}-tab">
-                    <div class="qlbh-template-grid-food row">
-                        @foreach($products as $product)
-                            <?php
-                                $class_img = '';
-                                $img_name = $product->product_image;
-                                if (empty($img_name)) {
-                                    $img_name = 'img-food-default.png';
-                                    $class_img = 'default';
-                                }
-                            ?>
-                            <div class="qlbh-template-grid-food-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200">
-                                <div class="card">
-                                    <img src="../public/uploads/products/{{ $img_name }}" class="card-img-top {{ $class_img }}" width="150" height="150">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $product->product_name }}</h5>
-                                        <p class="card-text">{{ number_format($product->product_price, 0, ',', '.') }}đ</p>
-                                        <div class="input-group number-input-group">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-outline-secondary button-decrement" type="button">-</button>
-                                            </div>
-                                            @if (isset($invoice_info_full[$product->product_id]))
-                                                <input type="number" name="qty_product-{{ $product->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="{{ $invoice_info_full[$product->product_id]->qty }}" min="0" max="100">
-                                            @else
-                                                <input type="number" name="qty_product-{{ $product->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="0" min="0" max="100">
-                                            @endif
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary button-increment" type="button">+</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </form>
 </div>
