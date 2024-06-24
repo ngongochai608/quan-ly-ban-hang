@@ -1,6 +1,6 @@
 @extends('admin_layout')
 @section('admin_content')
-<div class="container-fluid p-4">
+<div class="container-fluid p-3">
     <h3>Đặt bàn</h3>
     <?php
         $table_status_val = array(
@@ -54,7 +54,7 @@
                     $table_target = 'view-invoice/'.$table->table_invoice_id;
                 }
             ?>
-            <div class="order-table-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200 mt-3 mb-3">
+            <div class="order-table-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200 mt-3">
                 <a href="{{ URL::to($table_target) }}">
                     <div class="card">
                         <img src="public/uploads/table/table-default.png" class="card-img-top" width="150" height="150">

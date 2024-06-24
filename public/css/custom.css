@@ -19,6 +19,7 @@
 }
 .qlbh-template-grid-food-item .card-title {
     color: #696969;
+    text-align: center;
 }
 .qlbh-template-grid-food-item .btn {
     border-color: #C0C0C0;
@@ -44,9 +45,8 @@
 .qlbh-template-grid-food-item .card-body .number-input-group {
     margin-top: auto;
 }
-#preview-food-order .preview-food-order-item {
-    width: 300px;
-}
+
+/* Invoice */
 @media screen and (max-width: 600px) {
     .table-invoice {
         display: block;
@@ -77,5 +77,41 @@
     }
     .invoice-price-product {
         font-size: 18px;
+    }
+}
+
+/* Preview Food Order */
+#preview-food-order {
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    border-radius: 10px;
+    height: max-content;
+}
+.preview-food-order-wrap {
+    padding: 10px 20px;
+}
+#preview-food-order .preview-food-order-item {
+    width: 300px;
+}
+.preview-food-order-label {
+    color: #fff;
+    background-color: #696969;
+    font-weight: 400;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+@media (min-width: 768px) {
+    .order-food-wrap-tab-mobile {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .order-food-wrap-tab-mobile {
+        display: flex;
+    }
+    #preview-food-order {
+        width: 100%;
+        margin-top: 15px;
     }
 }
