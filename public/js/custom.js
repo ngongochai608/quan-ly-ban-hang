@@ -3,17 +3,16 @@ jQuery(document).ready(function ($) {
     $('#tabs-order .nav-link').click(function () {
         $('#tabs-order .nav-link').removeClass('active');
         $(this).addClass('active');
-        console.log($(this).data('controls'));
-        if ($(this).data('controls') == 'all') {
+        if ($(this).data('category-id') == 'all') {
             $('#tabs-content-order .qlbh-template-grid-food-item').css('display', 'block');
         } else {
             $('#tabs-content-order .qlbh-template-grid-food-item').css('display', 'none');
-            $(`#tabs-content-order .qlbh-template-grid-food-item[data-controls="${$(this).data('controls')}"]`).css('display', 'block');
+            $(`#tabs-content-order .qlbh-template-grid-food-item[data-category-id="${$(this).data('category-id')}"]`).css('display', 'block');
         }
     });
 
     // preview order food
-    function previewOrderFood () {
+    const previewOrderFood = function () {
         const foodItem = $('.qty-food-order');
         const previewWrap = $('#preview-food-order');
         const previewContent = $('#preview-food-order-content');
@@ -69,5 +68,43 @@ jQuery(document).ready(function ($) {
         setTimeout(function () {
             previewOrderFood();
         }, 50);
+    });
+
+    // Search Order Food
+    const debounceSearch = function (func, delay) {
+        let timer;
+        return function() {
+            clearTimeout(timer);
+            timer = setTimeout(func, delay);
+        };
+    }
+
+    const handleSearchOrderFood = function (keyword) {
+        const btnClear = $('#order-food-search-clear');
+        const itemFoods = $('.qlbh-template-grid-food-item');
+        if (keyword != '') {
+            btnClear.css('display', 'block');
+            itemFoods.each(function () {
+                const nameFood = $.trim($(this).data('name-food').toLowerCase());
+                if (itemFoods == nameFood || nameFood.indexOf(keyword) !== -1) {
+                    $(this).css('display', 'block');
+                } else {
+                    $(this).css('display', 'none');
+                }
+            });
+        } else {
+            btnClear.css('display', 'none');
+            itemFoods.css('display', 'block');
+        }
+    }
+
+    $('#order-food-search').keyup(debounceSearch(function() {
+        const keyword = $.trim($('#order-food-search').val().toLowerCase());
+        handleSearchOrderFood(keyword);
+    }, 500));
+
+    $('#order-food-search-clear').click(function () {
+        $('#order-food-search').val('');
+        $('#order-food-search').trigger('keyup');
     });
 });

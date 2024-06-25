@@ -2,6 +2,22 @@
 @section('admin_content')
 <div class="container-fluid p-3">
     <h3>Đặt món</h3>
+    <?php
+        $message = Session::get('message');
+        if ($message) {
+            ?>
+            <div class="toast align-items-center text-bg-success border-0 show mt-4 mb-4" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ $message }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+            <?php
+            Session::put('message', null);
+        }
+    ?>
     <div class="order-food-wrap-tab-mobile btn-group">
         <button class="btn btn-primary food-order">Món ăn</button>
         <button class="btn btn-secondary food-order-selected">Món đã chọn</button>
@@ -10,30 +26,18 @@
         <div class="d-flex justify-content-between gap-3">
             <div class="flex-grow-1" id="food-order">
                 {{ csrf_field() }}
-                <?php
-                    $message = Session::get('message');
-                    if ($message) {
-                        ?>
-                        <div class="toast align-items-center text-bg-success border-0 show mt-4 mb-4" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="d-flex">
-                                <div class="toast-body">
-                                    {{ $message }}
-                                </div>
-                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                        </div>
-                        <?php
-                        Session::put('message', null);
-                    }
-                ?>
+                <div class="input-group order-food-search-wrap">
+                    <input id="order-food-search" type="text" class="form-control" placeholder="Tìm món..." />
+                    <div id="order-food-search-clear" style="display: none;"><i class="fa-solid fa-circle-xmark text-danger"></i></div>
+                </div>
                 <input type="hidden" name="table_id" value="{{ $table_id }}" />
                 <ul id="tabs-order" class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" type="button" role="tab" data-controls="all">Tất cả</button>
+                        <button class="nav-link active" type="button" role="tab" data-category-id="all">Tất cả</button>
                     </li>
                     @foreach ($all_category as $category)
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" type="button" role="tab" data-controls="{{ $category->category_id }}">{{ $category->category_name }}</button>
+                            <button class="nav-link" type="button" role="tab" data-category-id="{{ $category->category_id }}">{{ $category->category_name }}</button>
                         </li>
                     @endforeach
                 </ul>
@@ -48,7 +52,7 @@
                                     $class_img = 'default';
                                 }
                             ?>
-                            <div class="qlbh-template-grid-food-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200" data-controls="{{ $product->product_category_id }}">
+                            <div class="qlbh-template-grid-food-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200" data-category-id="{{ $product->product_category_id }}" data-name-food="{{ $product->product_name }}">
                                 <div class="card">
                                     <img src="../public/uploads/products/{{ $img_name }}" class="card-img-top {{ $class_img }}" width="150" height="150">
                                     <div class="card-body">
