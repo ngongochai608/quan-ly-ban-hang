@@ -26,7 +26,7 @@
             Session::put('message', null);
         }
     ?>
-    <form action="{{ URL::to('update-invoice/'.$invoice->invoice_id) }}" method="post" class="mt-5">
+    <form action="{{ URL::to('update-invoice/'.$invoice->invoice_id) }}" method="post" class="mt-3">
         {{ csrf_field() }}
         <table class="table table-invoice">
             <thead>
@@ -44,17 +44,16 @@
                     <tr>
                         <th>{{ $stt; }}</th>
                         <td class="invoice-name-product">
-                            <h6>{{ $info_invoice->product_name }}</h6>
-                            <span>{{ number_format($info_invoice->product_price, 0, ',', '.') }}đ</span>
+                            <h5>{{ $info_invoice->product_name }}</h5>
                         </td>
                         <td style="width:220px;padding-right:40px;">
                             <div class="input-group number-input-group">
                                 <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary button-decrement" type="button">-</button>
+                                    <a href="/invoice-change-qty-item/{{ $invoice->invoice_id }}/{{ $info_invoice->product_id }}/{{ ($info_invoice->qty - 1) }}" class="btn btn-outline-secondary button-decrement" type="button">-</a>
                                 </div>
                                 <input type="number" name="qty_product-{{ $info_invoice->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="{{ $info_invoice->qty }}" min="1" max="100">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary button-increment" type="button">+</button>
+                                    <a href="/invoice-change-qty-item/{{ $invoice->invoice_id }}/{{ $info_invoice->product_id }}/{{ ($info_invoice->qty + 1) }}" class="btn btn-outline-secondary button-increment" type="button">+</a>
                                 </div>
                             </div>
                         </td>

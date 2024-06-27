@@ -57,7 +57,7 @@ class InvoiceController extends Controller
         $id_invoice = DB::table('qlbh_invoice')->insertGetId($data);
 
         $data_table = array(
-            'table_status' => 'waiting',
+            'table_status' => 'active',
             'table_invoice_id' => $id_invoice
         );
         DB::table('qlbh_table')->where('table_id', $table_id)->update($data_table);
@@ -183,5 +183,24 @@ class InvoiceController extends Controller
             ->with('all_product', $allProduct)
             ->with('invoice_info_full', $invoice_info_full)
             ->with('invoice_id', $invoice_id);
+    }
+
+    public function changQuantityInvoiceItem ($invoice_id, $product_id, $quantity) {
+        $invoice = DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->get()->first();
+        $invoice_info = json_decode($invoice->invoice_info);
+        $invoice_info_update = array();
+        foreach($invoice_info as $id => $qty) {
+            if ($id == $product_id) {
+                $invoice_info_update[$id] = $quantity;
+            } else {
+                $invoice_info_update[$id] = $qty;
+            }
+        }
+        $total_price = 0;
+        foreach($invoice_info_update as $id => $qty) {
+            $product_price = DB::table('qlbh_products')->where('product_id', $id)->pluck('product_price')->first();
+            $price = +$product_price * +$qty;
+            $total_price += $price;
+        }
     }
 }

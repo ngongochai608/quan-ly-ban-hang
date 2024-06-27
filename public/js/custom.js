@@ -43,6 +43,7 @@ jQuery(document).ready(function ($) {
         }
         previewContent.html(html);
     }
+    previewOrderFood();
     $('.order-food-wrap-tab-mobile .food-order').click(function () {
         $(this).removeClass('btn-secondary');
         $(this).addClass('btn-primary');

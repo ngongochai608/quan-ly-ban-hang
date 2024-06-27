@@ -5,10 +5,7 @@
     <?php
         $table_status_val = array(
             'empty' => 'Trống',
-            'full' => 'Đã ra món',
-            'close' => 'Đóng',
-            'waiting' => 'Đang chờ món',
-            'adding' => 'Thêm món'
+            'active' => 'Đang sử dung',
         );
         $message = Session::get('message');
         if ($message) {
@@ -34,23 +31,14 @@
                 if ($table->table_status == 'empty') {
                     $color_table_status = 'text-success';
                 }
-                if ($table->table_status == 'full') {
-                    $color_table_status = 'text-danger';
-                }
-                if ($table->table_status == 'close') {
-                    $color_table_status = 'text-secondary';
-                }
-                if ($table->table_status == 'waiting') {
+                if ($table->table_status == 'active') {
                     $color_table_status = 'text-warning';
-                }
-                if ($table->table_status == 'adding') {
-                    $color_table_status = 'text-primary';
                 }
 
                 if ($table->table_status == 'empty') {
                     $table_target = 'order-food/'.$table->table_id;
                 }
-                if ($table->table_status != 'empty' && $table->table_status != 'close') {
+                if ($table->table_status == 'active') {
                     $table_target = 'view-invoice/'.$table->table_invoice_id;
                 }
             ?>

@@ -8,14 +8,13 @@
         );
     ?>
     <h5><span class="fw-light">Mã hoá đơn:</span> <span class="fw-normal">{{ $invoice->invoice_name }}</span></h5>
-    <h6><span class="fw-light">Bàn:</span> <span class="fw-normal">{{ $table_invoice->table_name }}</span></h6>
-    <h6><span class="fw-light">Trạng thái:</span> <span class="fw-normal">{{ $status_invoice[$invoice->invoice_status] }}</span></h6>
-    <table class="table table-invoice">
+    <h5><span class="fw-light">Bàn:</span> <span class="fw-normal">{{ $table_invoice->table_name }}</span></h5>
+    <h5><span class="fw-light">Trạng thái:</span> <span class="fw-normal">{{ $status_invoice[$invoice->invoice_status] }}</span></h5>
+    <table class="table table-invoice mt-4">
         <thead>
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Số lượng</th>
                 <th scope="col">Thành tiền</th>
             </tr>
         </thead>
@@ -24,9 +23,8 @@
             @foreach($invoice_info_full as $info_invoice)
                 <tr>
                     <th>{{ $stt; }}</th>
-                    <td class="invoice-name-product">{{ $info_invoice->product_name }}</td>
-                    <td style="width:220px;padding-right:40px;">{{ $info_invoice->qty }}</td>
-                    <td class="invoice-price-product">{{ number_format($info_invoice->product_price, 0, ',', '.') }}đ</td>
+                    <td class="invoice-name-product">{{ $info_invoice->product_name }} <b>x {{ $info_invoice->qty }}</b></td>
+                    <td class="invoice-price-product">{{ number_format(($info_invoice->product_price * $info_invoice->qty), 0, ',', '.') }}đ</td>
                 </tr>
                 <?php $stt++; ?>
             @endforeach
@@ -47,10 +45,10 @@
         @endif
     </div>
     <div class="row">
-        <h5 class="text-end">Thành tiền: {{ number_format($invoice->invoice_total_price, 0, ',', '.') }}đ</h5>
+        <h5 class="text-end">Tổng tiền: {{ number_format($invoice->invoice_total_price, 0, ',', '.') }}đ</h5>
     </div>
 </div>
-<div class="container-fluid p-4">
+<div class="container-fluid px-4">
     <button id="btn-invoice-print" class="btn btn-primary d-block ml-auto">In hoá đơn</button>
 </div>
 <div id="invoice-print-area" class="container-fluid p-4 d-none">
@@ -68,7 +66,6 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Số lượng</th>
                 <th scope="col">Thành tiền</th>
             </tr>
         </thead>
@@ -77,9 +74,8 @@
             @foreach($invoice_info_full as $info_invoice)
                 <tr>
                     <th>{{ $stt; }}</th>
-                    <td class="invoice-name-product">{{ $info_invoice->product_name }}</td>
-                    <td style="width:220px;padding-right:40px;">{{ $info_invoice->qty }}</td>
-                    <td class="invoice-price-product">{{ number_format($info_invoice->product_price, 0, ',', '.') }}đ</td>
+                    <td class="invoice-name-product">{{ $info_invoice->product_name }} x {{ $info_invoice->qty }}</td>
+                    <td class="invoice-price-product">{{ number_format(($info_invoice->product_price * $info_invoice->qty), 0, ',', '.') }}đ</td>
                 </tr>
                 <?php $stt++; ?>
             @endforeach

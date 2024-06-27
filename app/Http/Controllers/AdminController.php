@@ -43,6 +43,14 @@ class AdminController extends Controller
     }
 
     public function adminShowDashboard () {
-        return view('admin.dashboard');
+        $invoices = DB::table('qlbh_invoice')->where('invoice_status', 'paid')->get();
+        $table_empty = DB::table('qlbh_table')->where('table_status', 'empty')->count();
+        $table_active = DB::table('qlbh_table')->where('table_status', 'active')->count();
+        $sale_total = 0;
+        foreach($invoices as $invoice) {
+            $invoice_total = $invoice->invoice_total_price;
+            $sale_total += $invoice_total;
+        }
+        return view('admin.dashboard')->with('sale_total', $sale_total)->with('table_empty', $table_empty)->with('table_active', $table_active);
     }
 }

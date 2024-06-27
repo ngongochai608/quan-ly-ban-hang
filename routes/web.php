@@ -159,6 +159,10 @@ Route::get('invoice-add-food/{invoice_id}', [
     InvoiceController::class,
     'addItemInvoice'
 ]);
+Route::get('invoice-change-qty-item/{invoice_id}/{product_id}/{quantity}', [
+    InvoiceController::class,
+    'changQuantityInvoiceItem'
+]);
 Route::post('create-invoice', [
     InvoiceController::class,
     'createInvoice'
