@@ -74,7 +74,11 @@ class InvoiceController extends Controller
             $product->qty = $qty;
             $invoice_info_full[] = $product;
         }
-        $table_invoice = DB::table('qlbh_table')->where('table_id', $invoice->invoice_table_id)->get()->first();
+        if ($invoice->invoice_table_id == 'take-away') {
+            $table_invoice = 'Mua mang về';
+        } else {
+            $table_invoice = DB::table('qlbh_table')->where('table_id', $invoice->invoice_table_id)->get()->first();
+        }
         return view('admin.view_invoice')->with('invoice', $invoice)->with('invoice_info_full', $invoice_info_full)->with('table_invoice', $table_invoice);
     }
 
@@ -155,8 +159,12 @@ class InvoiceController extends Controller
             $product->qty = $qty;
             $invoice_info_full[] = $product;
         }
-        $table_invoice = DB::table('qlbh_table')->where('table_id', $invoice->invoice_table_id)->get()->first();
-        DB::table('qlbh_table')->where('table_id', $table_invoice->table_id)->update(['table_status' => 'empty']);
+        if ($invoice->invoice_table_id == 'take-away') {
+            $table_invoice = 'Mua mang về';
+        } else {
+            $table_invoice = DB::table('qlbh_table')->where('table_id', $invoice->invoice_table_id)->get()->first();
+            DB::table('qlbh_table')->where('table_id', $table_invoice->table_id)->update(['table_status' => 'empty']);
+        }
         return view('admin.print_invoice')->with('invoice', $invoice)->with('table_invoice', $table_invoice)->with('invoice_info_full', $invoice_info_full);
     }
 
@@ -202,5 +210,28 @@ class InvoiceController extends Controller
             $price = +$product_price * +$qty;
             $total_price += $price;
         }
+        $invoice_info_update_json = json_encode($invoice_info_update);
+        $data_update = array(
+            'invoice_info' => $invoice_info_update_json,
+        );
+        if (!empty($invoice->invoice_discount_type)) {
+            $total_price_discount = $total_price;
+            $data_update['invoice_total_price_discount'] = $total_price_discount;
+            if ($invoice->invoice_discount_type  == 'money') {
+                $total_price = $total_price - $invoice->invoice_discount_value;
+                if ($request->invoice_discount_type == 'percent') {
+                    $percent_value = ($total_price * $request->invoice_discount_value) / 100;
+                    $total_price = $total_price - $percent_value;
+                }
+            }
+            if ($invoice->invoice_discount_type == 'percent') {
+                $percent_value = ($total_price * $invoice->invoice_discount_value) / 100;
+                $total_price = $total_price - $percent_value;
+            }
+        }
+        $data_update['invoice_total_price'] = $total_price;
+
+        DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->update($data_update);
+        return Redirect::to('view-invoice/'.$invoice_id);
     }
 }

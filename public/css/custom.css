@@ -21,14 +21,14 @@
     color: #696969;
     text-align: center;
 }
-.qlbh-template-grid-food-item .btn {
+/* .qlbh-template-grid-food-item .btn {
     border-color: #C0C0C0;
     color: #C0C0C0;
 }
 .qlbh-template-grid-food-item .btn:hover {
     background-color: #C0C0C0;
     color: #fff;
-}
+} */
 .qlbh-template-grid-food {
     align-items: stretch;
 }

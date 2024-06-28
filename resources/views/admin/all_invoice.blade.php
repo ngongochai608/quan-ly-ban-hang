@@ -1,6 +1,6 @@
 @extends('admin_layout')
 @section('admin_content')
-<div class="container-fluid p-4">
+<div class="container-fluid p-3">
     <h3>Danh sách hoá đơn</h3>
     <?php
         $message = Session::get('message');
@@ -24,6 +24,7 @@
                 <tr>
                     <th scope="col">STT</th>
                     <th scope="col">Tên hoá đơn</th>
+                    <th scope="col">Ngày tạo</th>
                     <th scope="col">Tổng tiền</th>
                     <th scope="col"></th>
                 </tr>
@@ -34,6 +35,7 @@
                     <tr>
                         <th>{{ $stt; }}</th>
                         <td><h5>{{ $invoice->invoice_name }}</h5></td>
+                        <td>{{ $invoice->created_at }}</td>
                         <td>{{ number_format($invoice->invoice_total_price, 0, ',', '.') }}đ</td>
                         <td>
                             <a href="{{ URL::to('edit-invoice/'.$invoice->invoice_id) }}" class="btn btn-primary">Sửa</a>

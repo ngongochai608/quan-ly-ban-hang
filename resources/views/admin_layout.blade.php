@@ -46,6 +46,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Đặt bàn
                             </a>
+                            <a class="nav-link" href="{{ URL::to('order-food/take-away') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Mua mang đi
+                            </a>
                             <a class="nav-link" href="{{ URL::to('all-invoice') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Hoá đơn

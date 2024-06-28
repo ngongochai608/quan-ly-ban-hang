@@ -8,8 +8,16 @@
         );
     ?>
     <h5><span class="fw-light">Mã hoá đơn:</span> <span class="fw-normal">{{ $invoice->invoice_name }}</span></h5>
-    <h6><span class="fw-light">Bàn:</span> <span class="fw-normal">{{ $table_invoice->table_name }}</span></h6>
-    <h6><span class="fw-light">Trạng thái:</span> <span class="fw-normal">{{ $status_invoice[$invoice->invoice_status] }}</span></h6>
+    <h5>
+        <span class="fw-light">Bàn:</span> <span class="fw-normal">
+            <?php if ($table_invoice == 'Mua mang về') { ?>
+                {{ $table_invoice }}
+            <?php } else { ?>
+                {{ $table_invoice->table_name }}
+            <?php } ?>
+        </span>
+    </h5>
+    <h5><span class="fw-light">Trạng thái:</span> <span class="fw-normal">{{ $status_invoice[$invoice->invoice_status] }}</span></h5>
     <?php
         $message = Session::get('message');
         if ($message) {
@@ -49,11 +57,11 @@
                         <td style="width:220px;padding-right:40px;">
                             <div class="input-group number-input-group">
                                 <div class="input-group-prepend">
-                                    <a href="/invoice-change-qty-item/{{ $invoice->invoice_id }}/{{ $info_invoice->product_id }}/{{ ($info_invoice->qty - 1) }}" class="btn btn-outline-secondary button-decrement" type="button">-</a>
+                                    <a href="{{ URL::to('invoice-change-qty-item/'.$invoice->invoice_id.'/'.$info_invoice->product_id.'/'.($info_invoice->qty - 1)) }}" class="btn btn-outline-secondary button-decrement" type="button">-</a>
                                 </div>
                                 <input type="number" name="qty_product-{{ $info_invoice->product_id }}" class="form-control input-number ms-2 me-2 rounded-2 text-center" value="{{ $info_invoice->qty }}" min="1" max="100">
                                 <div class="input-group-append">
-                                    <a href="/invoice-change-qty-item/{{ $invoice->invoice_id }}/{{ $info_invoice->product_id }}/{{ ($info_invoice->qty + 1) }}" class="btn btn-outline-secondary button-increment" type="button">+</a>
+                                    <a href="{{ URL::to('invoice-change-qty-item/'.$invoice->invoice_id.'/'.$info_invoice->product_id.'/'.($info_invoice->qty + 1)) }}" class="btn btn-outline-secondary button-increment" type="button">+</a>
                                 </div>
                             </div>
                         </td>

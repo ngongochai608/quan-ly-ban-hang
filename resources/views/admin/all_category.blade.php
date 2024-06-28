@@ -1,6 +1,6 @@
 @extends('admin_layout')
 @section('admin_content')
-<div class="container-fluid p-4">
+<div class="container-fluid p-3">
     <h3>Danh sách danh mục</h3>
     <?php
         $message = Session::get('message');
@@ -18,20 +18,32 @@
             Session::put('message', null);
         }
     ?>
-    <div class="qlbh-template-grid-food row">
-        <?php
-            $count = 1;
-        ?>
-        @foreach($all_category as $category)
-            <ul class="list-group list-group-horizontal mb-2">
-                <li class="list-group-item">{{ $count }}</li>
-                <li class="list-group-item flex-grow-1">{{ $category->category_name }}</li>
-                <li class="list-group-item">
-                    <a href="{{ URL::to('edit-category/'.$category->category_id) }}" class="btn btn-primary">Sửa</a>
-                    <a href="{{ URL::to('remove-category/'.$category->category_id) }}" class="btn btn-danger">Xoá</a>
-                </li>
-            </ul>
-        @endforeach
+    <div class="qlbh-template-grid-food">
+        <table class="table table-bordered table-invoice">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên danh mục</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $count = 1; ?>
+                @foreach($all_category as $category)
+                    <tr>
+                        <th>{{ $count; }}</th>
+                        <td><h5>{{ $category->category_name }}</h5></td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ URL::to('edit-category/'.$category->category_id) }}" class="btn btn-primary">Sửa</a>
+                                <a href="{{ URL::to('remove-category/'.$category->category_id) }}" class="btn btn-danger">Xoá</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php $count++; ?>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection

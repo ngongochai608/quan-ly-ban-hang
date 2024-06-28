@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost
--- Thời gian đã tạo: Th6 24, 2024 lúc 09:50 AM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.0.28
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th6 28, 2024 lúc 09:29 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -90,12 +90,17 @@ CREATE TABLE `qlbh_category_product` (
 --
 
 INSERT INTO `qlbh_category_product` (`category_id`, `category_name`, `category_status`, `created_at`, `updated_at`) VALUES
-(2, 'Nước Uống', '1', NULL, NULL),
-(3, 'sốt trứng muối', '1', NULL, NULL),
-(4, 'sốt phô mai', '1', NULL, NULL),
-(5, 'sốt sa tế', '1', NULL, NULL),
-(6, 'đồ nướng', '1', NULL, NULL),
-(7, 'gỏi', '1', NULL, NULL);
+(8, 'khai vị', '1', NULL, NULL),
+(9, 'gỏi', '1', NULL, NULL),
+(10, 'mực', '1', NULL, NULL),
+(11, 'bạch tuộc', '1', NULL, NULL),
+(12, 'tôm - tôm tít', '1', NULL, NULL),
+(13, 'ếch', '1', NULL, NULL),
+(14, 'chân gà', '1', NULL, NULL),
+(15, 'sụn gà', '1', NULL, NULL),
+(16, 'bò', '1', NULL, NULL),
+(17, 'món ăn no', '1', NULL, NULL),
+(18, 'lẩu', '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -122,15 +127,17 @@ CREATE TABLE `qlbh_invoice` (
 --
 
 INSERT INTO `qlbh_invoice` (`invoice_id`, `invoice_name`, `invoice_table_id`, `invoice_info`, `invoice_status`, `invoice_discount_value`, `invoice_discount_type`, `invoice_total_price_discount`, `invoice_total_price`, `created_at`, `updated_at`) VALUES
-(1, '5cVE33sIgt4qpV9iGCnu', '1', '{\"37\":2,\"38\":2,\"39\":1,\"40\":1,\"41\":2,\"42\":1,\"44\":1}', 'paid', '10', 'percent', '460000', '414000', '2024-06-01 12:10:58', NULL),
-(2, 'tJunZakzPhIP6ptJ2vsp', '1', '{\"37\":2,\"38\":2,\"39\":1,\"40\":1,\"41\":2,\"42\":1,\"44\":1}', 'paid', '10', 'percent', '460000', '414000', '2024-06-03 04:55:32', NULL),
-(3, 'RBgrnO1Tri7xZhJQ8rIF', '1', '{\"37\":2,\"38\":2,\"39\":1,\"40\":1,\"41\":2,\"42\":1,\"44\":1}', 'paid', '10', 'percent', '460000', '414000', '2024-06-03 04:57:34', NULL),
-(4, 'NnVOBbhZ8Uxzf3npnqR5', '1', '{\"37\":2,\"38\":2,\"39\":1,\"40\":1,\"41\":2,\"42\":1,\"44\":1}', 'paid', '10', 'percent', '460000', '414000', '2024-06-05 02:32:41', NULL),
-(5, 'lb0m3XYgTPa6u8yZFlL0', '1', '{\"37\":2}', 'paid', '', '', '', '100000', '2024-06-08 03:14:33', NULL),
-(6, 'OFoPEiiCcE0XZhR3U11W', '1', '{\"38\":2}', 'paid', '', '', '', '100000', '2024-06-08 03:22:53', NULL),
-(7, 'jluoZQ1iZvM42uPoey20', '1', '{\"37\":2,\"41\":6}', 'paid', '', '', '', '160000', '2024-06-10 04:46:50', NULL),
-(8, 'QHruIIHSRUOkVoo1fHz6', '1', '{\"37\":1,\"38\":1,\"39\":1,\"40\":1,\"41\":3,\"42\":3}', 'paid', '', '', '', '430000', '2024-06-15 05:51:57', NULL),
-(9, 'osXVRjOygtXMrXKSesys', '1', '{\"37\":2}', 'paid', '', '', '', '100000', '2024-06-20 04:17:02', NULL);
+(1, '5cVE33sIgt4qpV9iGCnu', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-01 12:10:58', NULL),
+(2, 'tJunZakzPhIP6ptJ2vsp', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-03 04:55:32', NULL),
+(3, 'RBgrnO1Tri7xZhJQ8rIF', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-03 04:57:34', NULL),
+(4, 'NnVOBbhZ8Uxzf3npnqR5', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-05 02:32:41', NULL),
+(5, 'lb0m3XYgTPa6u8yZFlL0', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-08 03:14:33', NULL),
+(6, 'OFoPEiiCcE0XZhR3U11W', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-08 03:22:53', NULL),
+(7, 'jluoZQ1iZvM42uPoey20', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-10 04:46:50', NULL),
+(8, 'QHruIIHSRUOkVoo1fHz6', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-15 05:51:57', NULL),
+(9, 'osXVRjOygtXMrXKSesys', '1', '{\"37\":3,\"38\":2,\"39\":1}', 'paid', '10', 'percent', '300000', '270000', '2024-06-20 04:17:02', NULL),
+(10, 'puR5mrbqfHD7yJwAdLap', '1', '{\"37\":\"2\",\"38\":2,\"39\":\"2\"}', 'paid', '10', 'percent', '300000', '270000', '2024-06-27 01:22:39', NULL),
+(11, '0b1Lfgt5Z9zrkOkK8Qnb', 'take-away', '{\"46\":1,\"49\":2,\"54\":2,\"60\":2}', 'paid', '', '', '', '288000', '2024-06-28 00:15:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -154,15 +161,29 @@ CREATE TABLE `qlbh_products` (
 --
 
 INSERT INTO `qlbh_products` (`product_id`, `product_name`, `product_image`, `product_price`, `product_category_id`, `product_status`, `created_at`, `updated_at`) VALUES
-(37, 'ốc hương sốt trứng muối', '', '50000', '3', '', NULL, NULL),
-(38, 'ốc hương sốt phô mai', '', '50000', '4', '', NULL, NULL),
-(39, 'ốc hương sốt sa tế', '', '50000', '5', '', NULL, NULL),
-(40, 'hầu nướng', '', '70000', '6', '', NULL, NULL),
-(41, 'nước pepsi', '', '10000', '2', '', NULL, NULL),
-(42, 'ốc móng tay sốt trứng muối', '', '60000', '3', '', NULL, NULL),
-(43, 'ốc móng tay sốt phô mai', '', '60000', '4', '', NULL, NULL),
-(44, 'ốc móng tay sốt sa tế', '', '60000', '5', '', NULL, NULL),
-(45, 'gỏi bạch tuộc', '', '75000', '7', '', NULL, NULL);
+(46, 'Bắp xào bơ', '', '20000', '8', '', NULL, NULL),
+(47, 'Khoai tây chiên', '', '20000', '8', '', NULL, NULL),
+(48, 'Bánh tráng', '', '5000', '8', '', NULL, NULL),
+(49, 'Bánh mì', '', '4000', '8', '', NULL, NULL),
+(50, 'Gỏi sứa mắm nhỉ', '', '60000', '9', '', NULL, NULL),
+(51, 'Gỏi bạch tuộc', '', '60000', '9', '', NULL, NULL),
+(52, 'Gỏi ốc giấy', '', '60000', '9', '', NULL, NULL),
+(53, 'Gỏi hải sản đặc biệt', '', '75000', '9', '', NULL, NULL),
+(54, 'Gỏi chân gà', '', '55000', '9', '', NULL, NULL),
+(55, 'Mực hấp gừng', '', '75000', '10', '', NULL, NULL),
+(56, 'Mực sốt mắm tắc cay', '', '75000', '10', '', NULL, NULL),
+(57, 'Mực sốt mắm nhĩ', '', '75000', '10', '', NULL, NULL),
+(58, 'Mực sốt sa tế', '', '75000', '10', '', NULL, NULL),
+(59, 'Mực chiên mắm', '', '75000', '10', '', NULL, NULL),
+(60, 'Mực sốt chua cay', '', '75000', '10', '', NULL, NULL),
+(61, 'Bạch tuộc sốt sa tế', '', '65000', '11', '', NULL, NULL),
+(62, 'Bạch tuộc sốt mắm nhĩ', '', '65000', '11', '', NULL, NULL),
+(63, 'Bạch tuộc sốt chua cay', '', '65000', '11', '', NULL, NULL),
+(64, 'Bạch tuộc nhúng ớt', '', '65000', '11', '', NULL, NULL),
+(65, 'Tôm rang me', '', '65000', '12', '', NULL, NULL),
+(66, 'Tôm tít rang me', '', '65000', '12', '', NULL, NULL),
+(67, 'Tôm cháy tỏi', '', '65000', '12', '', NULL, NULL),
+(68, 'Tôm tít cháy tỏi', '', '65000', '12', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -184,11 +205,26 @@ CREATE TABLE `qlbh_table` (
 --
 
 INSERT INTO `qlbh_table` (`table_id`, `table_name`, `table_invoice_id`, `table_status`, `created_at`, `updated_at`) VALUES
-(1, '01', '9', 'empty', NULL, NULL),
+(1, '01', '10', 'empty', NULL, NULL),
 (2, '02', '', 'empty', NULL, NULL),
 (3, '03', '', 'empty', NULL, NULL),
 (4, '04', '', 'empty', NULL, NULL),
-(5, '05', '', 'empty', NULL, NULL);
+(5, '05', '', 'empty', NULL, NULL),
+(6, '06', '', 'empty', NULL, NULL),
+(7, '07', '', 'empty', NULL, NULL),
+(8, '08', '', 'empty', NULL, NULL),
+(9, '09', '', 'empty', NULL, NULL),
+(10, '10', '', 'empty', NULL, NULL),
+(11, '11', '', 'empty', NULL, NULL),
+(12, '12', '', 'empty', NULL, NULL),
+(13, '13', '', 'empty', NULL, NULL),
+(14, '14', '', 'empty', NULL, NULL),
+(15, '15', '', 'empty', NULL, NULL),
+(16, '16', '', 'empty', NULL, NULL),
+(17, '17', '', 'empty', NULL, NULL),
+(18, '18', '', 'empty', NULL, NULL),
+(19, '19', '', 'empty', NULL, NULL),
+(20, '20', '', 'empty', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,25 +318,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT cho bảng `qlbh_category_product`
 --
 ALTER TABLE `qlbh_category_product`
-  MODIFY `category_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `category_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `qlbh_invoice`
 --
 ALTER TABLE `qlbh_invoice`
-  MODIFY `invoice_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `invoice_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `qlbh_products`
 --
 ALTER TABLE `qlbh_products`
-  MODIFY `product_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `product_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT cho bảng `qlbh_table`
 --
 ALTER TABLE `qlbh_table`
-  MODIFY `table_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `table_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `qlbh_users`

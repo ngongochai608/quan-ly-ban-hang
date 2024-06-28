@@ -8,7 +8,15 @@
         );
     ?>
     <h5><span class="fw-light">Mã hoá đơn:</span> <span class="fw-normal">{{ $invoice->invoice_name }}</span></h5>
-    <h5><span class="fw-light">Bàn:</span> <span class="fw-normal">{{ $table_invoice->table_name }}</span></h5>
+    <h5>
+        <span class="fw-light">Bàn:</span> <span class="fw-normal">
+            <?php if ($table_invoice == 'Mua mang về') { ?>
+                {{ $table_invoice }}
+            <?php } else { ?>
+                {{ $table_invoice->table_name }}
+            <?php } ?>
+        </span>
+    </h5>
     <h5><span class="fw-light">Trạng thái:</span> <span class="fw-normal">{{ $status_invoice[$invoice->invoice_status] }}</span></h5>
     <table class="table table-invoice mt-4">
         <thead>
@@ -59,8 +67,16 @@
         );
     ?>
     <h5><span class="fw-light">Mã hoá đơn:</span> <span class="fw-normal">{{ $invoice->invoice_name }}</span></h5>
-    <h6><span class="fw-light">Bàn:</span> <span class="fw-normal">{{ $table_invoice->table_name }}</span></h6>
-    <h6><span class="fw-light">Trạng thái:</span> <span class="fw-normal">{{ $status_invoice[$invoice->invoice_status] }}</span></h6>
+    <h5>
+        <span class="fw-light">Bàn:</span> <span class="fw-normal">
+            <?php if ($table_invoice == 'Mua mang về') { ?>
+                {{ $table_invoice }}
+            <?php } else { ?>
+                {{ $table_invoice->table_name }}
+            <?php } ?>
+        </span>
+    </h5>
+    <h5><span class="fw-light">Trạng thái:</span> <span class="fw-normal">{{ $status_invoice[$invoice->invoice_status] }}</span></h5>
     <table class="table table-bordered table-invoice">
         <thead>
             <tr>

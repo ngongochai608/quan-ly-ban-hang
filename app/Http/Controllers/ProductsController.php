@@ -57,8 +57,9 @@ class ProductsController extends Controller
     }
 
     public function allProduct () {
-        $all_products = DB::table('qlbh_products')->get();
-        return view('admin.all_products')->with('all_products', $all_products);
+        $all_product = DB::table('qlbh_products')->get();
+        $all_category = DB::table('qlbh_category_product')->get();
+        return view('admin.all_products')->with('all_product', $all_product)->with('all_category', $all_category);
     }
 
     public function saveProduct (Request $request) {

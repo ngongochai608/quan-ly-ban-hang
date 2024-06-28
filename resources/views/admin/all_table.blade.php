@@ -30,10 +30,12 @@
             <div class="order-table-item col-6 col-md-4 col-lg-3 col-xl-2 min-w-200 mt-3 mb-3">
                 <div class="card">
                     <img src="public/uploads/table/table-default.png" class="card-img-top" width="150" height="150">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <h5 class="card-title">{{ $table->table_name }}</h5>
-                        <a href="{{ URL::to('edit-table/'.$table->table_id) }}" class="btn btn-primary">Sửa</a>
-                        <a href="{{ URL::to('remove-table/'.$table->table_id) }}" class="btn btn-danger">Xoá</a>
+                        <div class="btn-group w-100">
+                            <a href="{{ URL::to('edit-table/'.$table->table_id) }}" class="btn btn-primary">Sửa</a>
+                            <a href="{{ URL::to('remove-table/'.$table->table_id) }}" class="btn btn-danger">Xoá</a>
+                        </div>
                     </div>
                 </div>
             </div>
