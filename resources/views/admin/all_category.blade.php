@@ -36,7 +36,7 @@
                         <td>
                             <div class="btn-group">
                                 <a href="{{ URL::to('edit-category/'.$category->category_id) }}" class="btn btn-primary">Sửa</a>
-                                <a href="{{ URL::to('remove-category/'.$category->category_id) }}" class="btn btn-danger">Xoá</a>
+                                <a href="{{ URL::to('remove-category/'.$category->category_id) }}" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#popupconfirm">Xoá</a>
                             </div>
                         </td>
                     </tr>

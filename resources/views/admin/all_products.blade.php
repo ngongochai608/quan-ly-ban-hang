@@ -53,7 +53,7 @@
                                     <p class="card-text price">{{ number_format($product->product_price, 0, ',', '.') }}đ</p>
                                     <div class="btn-group mt-auto" role="group" aria-label="Basic example">
                                         <a href="{{ URL::to('edit-product/'.$product->product_id) }}" class="btn btn-primary">Sửa</a>
-                                        <a href="{{ URL::to('remove-product/'.$product->product_id) }}" class="btn btn-danger">Xóa</a>
+                                        <a href="{{ URL::to('remove-product/'.$product->product_id) }}" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#popupconfirm">Xóa</a>
                                     </div>
                                 </div>
                             </div>

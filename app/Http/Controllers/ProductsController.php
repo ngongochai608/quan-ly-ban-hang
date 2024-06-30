@@ -51,7 +51,6 @@ class ProductsController extends Controller
         $product_remove = DB::table('qlbh_products')->where('product_id', $product_id)->get()->first();
         $product_remove_name = $product_remove->product_name;
         DB::table('qlbh_products')->where('product_id', $product_id)->delete();
-        $all_products = DB::table('qlbh_products')->get();
         Session::put('message', 'Đã xoá món '.$product_remove_name);
         return Redirect::to('all-product');
     }

@@ -1,4 +1,33 @@
 jQuery(document).ready(function ($) {
+    // button up and down quantity
+    document.querySelectorAll('.button-increment').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var inputName = this.closest('.number-input-group').querySelector('.input-number').getAttribute('name');
+            var inputs = document.querySelectorAll(`.input-number[name="${inputName}"]`);
+            inputs.forEach(input => {
+                var currentValue = parseInt(input.value);
+                var maxValue = parseInt(input.max);
+                if (!isNaN(currentValue) && currentValue < maxValue) {
+                    input.value = currentValue + 1;
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.button-decrement').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var inputName = this.closest('.number-input-group').querySelector('.input-number').getAttribute('name');
+            var inputs = document.querySelectorAll(`.input-number[name="${inputName}"]`);
+            inputs.forEach(input => {
+                var currentValue = parseInt(input.value);
+                var minValue = parseInt(input.min);
+                if (!isNaN(currentValue) && currentValue > minValue) {
+                    input.value = currentValue - 1;
+                }
+            });
+        });
+    });
+
     // tabs order
     $('#tabs-order .nav-link').click(function () {
         $('#tabs-order .nav-link').removeClass('active');
@@ -107,5 +136,15 @@ jQuery(document).ready(function ($) {
     $('#order-food-search-clear').click(function () {
         $('#order-food-search').val('');
         $('#order-food-search').trigger('keyup');
+    });
+
+    // Popup confirm
+    $('[data-bs-target="#popupconfirm"]').click(function () {
+        const href = $(this).attr('href');
+        $('#confirmDeleteBtn').data('link-confirm', href);
+        $('#confirmDeleteBtn').click(function () {
+            const linkConfirm = $(this).data('link-confirm');
+            window.location.href = linkConfirm;
+        });
     });
 });

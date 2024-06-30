@@ -39,7 +39,7 @@
                         <td>{{ number_format($invoice->invoice_total_price, 0, ',', '.') }}đ</td>
                         <td>
                             <a href="{{ URL::to('edit-invoice/'.$invoice->invoice_id) }}" class="btn btn-primary">Sửa</a>
-                            <a href="{{ URL::to('remove-invoice/'.$invoice->invoice_id) }}" class="btn btn-danger">Xoá</a>
+                            <a href="{{ URL::to('remove-invoice/'.$invoice->invoice_id) }}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#popupconfirm">Xoá</a>
                         </td>
                     </tr>
                     <?php $stt++; ?>

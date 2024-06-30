@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="col-xl-4 col-md-6">
-            <div class="card bg-warning text-white mb-4">
+            <div class="card bg-success text-white mb-4">
                 <div class="card-body">Bàn đang trống</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <h5>{{ $table_empty }}</h5>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-xl-4 col-md-6">
-            <div class="card bg-success text-white mb-4">
+            <div class="card bg-warning text-white mb-4">
                 <div class="card-body">Bàn đang ngồi</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <h5>{{ $table_active }}</h5>

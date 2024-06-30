@@ -12,16 +12,10 @@ session_start();
 
 class InvoiceController extends Controller
 {
-    function generateRandomString($length = 20) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-    
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
-    
-        return $randomString;
+    function createNameInvoiceNew() {
+        $number_invoice = DB::table('qlbh_invoice')->get()->count();
+        $name_invoice = 'OXSG_'.($number_invoice + 1);
+        return $name_invoice;
     }
 
     public function createInvoice (Request $request) {
@@ -44,7 +38,7 @@ class InvoiceController extends Controller
             $total_price += $price;
         }
         $data = array();
-        $data['invoice_name'] = $this->generateRandomString();
+        $data['invoice_name'] = $this->createNameInvoiceNew();
         $data['invoice_info'] = json_encode($data_qty_product_validation);
         $data['invoice_table_id'] = $table_id;
         $data['invoice_status'] = 'unpaid';
@@ -79,7 +73,8 @@ class InvoiceController extends Controller
         } else {
             $table_invoice = DB::table('qlbh_table')->where('table_id', $invoice->invoice_table_id)->get()->first();
         }
-        return view('admin.view_invoice')->with('invoice', $invoice)->with('invoice_info_full', $invoice_info_full)->with('table_invoice', $table_invoice);
+        $table_empty = DB::table('qlbh_table')->where('table_status', 'empty')->get();
+        return view('admin.view_invoice')->with('invoice', $invoice)->with('invoice_info_full', $invoice_info_full)->with('table_invoice', $table_invoice)->with('table_empty', $table_empty);
     }
 
     public function allInvoice () {
@@ -233,5 +228,20 @@ class InvoiceController extends Controller
 
         DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->update($data_update);
         return Redirect::to('view-invoice/'.$invoice_id);
+    }
+    public function removeInvoice ($invoice_id) {
+        $invoice_remove = DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->get()->first();
+        $invoice_remove_name = $invoice_remove->invoice_name;
+        DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->delete();
+        Session::put('message', 'Đã xoá hóa đơn '.$invoice_remove_name);
+        return Redirect::to('all-invoice');
+    }
+    public function changeTable ($invoice_id, $table_id) {
+        $invoice = DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->get()->first();
+        $table_id_curent = $invoice->invoice_table_id;
+        DB::table('qlbh_invoice')->where('invoice_id', $invoice_id)->update(['invoice_table_id' => $table_id]);
+        DB::table('qlbh_table')->where('table_id', $table_id_curent)->update(['table_status' => 'empty']);
+        DB::table('qlbh_table')->where('table_id', $table_id)->update(['table_status' => 'active', 'table_invoice_id' => $invoice_id]);
+        return Redirect::to('view-invoice/'.$invoice_id)->with('message', 'Đã thay đổi từ bàn '.$table_id_curent.' sang bàn '.$table_id);
     }
 }

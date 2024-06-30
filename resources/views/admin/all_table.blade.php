@@ -34,7 +34,7 @@
                         <h5 class="card-title">{{ $table->table_name }}</h5>
                         <div class="btn-group w-100">
                             <a href="{{ URL::to('edit-table/'.$table->table_id) }}" class="btn btn-primary">Sửa</a>
-                            <a href="{{ URL::to('remove-table/'.$table->table_id) }}" class="btn btn-danger">Xoá</a>
+                            <a href="{{ URL::to('remove-table/'.$table->table_id) }}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#popupconfirm">Xoá</a>
                         </div>
                     </div>
                 </div>

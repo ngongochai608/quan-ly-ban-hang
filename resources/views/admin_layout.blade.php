@@ -100,6 +100,23 @@
                     @yield('admin_content')
                 </main>
             </div>
+            {{-- Popup Confirm --}}
+            <!-- Button trigger modal -->
+            <div class="modal fade" id="popupconfirm" tabindex="-1" aria-labelledby="popupconfirmLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Xác nhận!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="confirmDeleteBtn">Có</button>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{ asset('public/js/scripts.js') }}"></script>
@@ -109,35 +126,5 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="{{ asset('public/js/datatables-simple-demo.js') }}"></script>
         <script src="{{ asset('public/js/custom.js') }}"></script>
-
-        <script>
-            document.querySelectorAll('.button-increment').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var inputName = this.closest('.number-input-group').querySelector('.input-number').getAttribute('name');
-                    var inputs = document.querySelectorAll(`.input-number[name="${inputName}"]`);
-                    inputs.forEach(input => {
-                        var currentValue = parseInt(input.value);
-                        var maxValue = parseInt(input.max);
-                        if (!isNaN(currentValue) && currentValue < maxValue) {
-                            input.value = currentValue + 1;
-                        }
-                    });
-                });
-            });
-
-            document.querySelectorAll('.button-decrement').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var inputName = this.closest('.number-input-group').querySelector('.input-number').getAttribute('name');
-                    var inputs = document.querySelectorAll(`.input-number[name="${inputName}"]`);
-                    inputs.forEach(input => {
-                        var currentValue = parseInt(input.value);
-                        var minValue = parseInt(input.min);
-                        if (!isNaN(currentValue) && currentValue > minValue) {
-                            input.value = currentValue - 1;
-                        }
-                    });
-                });
-            });
-        </script>
     </body>
 </html>

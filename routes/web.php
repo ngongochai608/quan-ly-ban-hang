@@ -163,9 +163,17 @@ Route::get('invoice-change-qty-item/{invoice_id}/{product_id}/{quantity}', [
     InvoiceController::class,
     'changQuantityInvoiceItem'
 ]);
+Route::get('invoice-change-table/{invoice_id}/{table_id}', [
+    InvoiceController::class,
+    'changeTable'
+]);
 Route::post('create-invoice', [
     InvoiceController::class,
     'createInvoice'
+]);
+Route::get('remove-invoice/{invoice_id}', [
+    InvoiceController::class,
+    'removeInvoice'
 ]);
 
 

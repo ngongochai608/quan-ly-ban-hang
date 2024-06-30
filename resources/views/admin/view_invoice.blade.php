@@ -34,6 +34,16 @@
             Session::put('message', null);
         }
     ?>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropDownChangeTableInvoice" data-bs-toggle="dropdown" aria-expanded="false">
+            Đổi bàn
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropDownChangeTableInvoice">
+            @foreach ($table_empty as $table)
+                <li><a class="dropdown-item" href="{{ URL::to('/invoice-change-table/'.$invoice->invoice_id.'/'.$table->table_id) }}">{{ $table->table_name }}</a></li>
+            @endforeach
+        </ul>
+    </div>
     <form action="{{ URL::to('update-invoice/'.$invoice->invoice_id) }}" method="post" class="mt-3">
         {{ csrf_field() }}
         <table class="table table-invoice">
@@ -67,7 +77,7 @@
                         </td>
                         <td class="invoice-price-product">{{ number_format(($info_invoice->product_price * $info_invoice->qty), 0, ',', '.') }}đ</td>
                         <td style="width:60px">
-                            <a href="{{ URL::to('remove-item-invoice/'.$info_invoice->product_id.'/'.$invoice->invoice_id) }}" class="btn btn-danger">Xoá</a>
+                            <a href="{{ URL::to('remove-item-invoice/'.$info_invoice->product_id.'/'.$invoice->invoice_id) }}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#popupconfirm">Xoá</a>
                         </td>
                     </tr>
                     <?php $stt++; ?>
